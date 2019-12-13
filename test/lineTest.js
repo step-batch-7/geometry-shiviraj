@@ -24,9 +24,15 @@ describe('Equal Lines', () => {
     const actual = line1.isEqual(line2);
     assert.deepStrictEqual(actual, true);
   });
+
   it('Should check if lines are not equal', () => {
     const line2 = new Line({ x: 2, y: 5 }, { x: 5, y: 3 });
     const actual = line1.isEqual(line2);
+    assert.deepStrictEqual(actual, false);
+  });
+
+  it('Should check for if lines are not same type', () => {
+    const actual = line1.isEqual('line2');
     assert.deepStrictEqual(actual, false);
   });
 });

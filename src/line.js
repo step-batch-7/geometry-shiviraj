@@ -2,6 +2,12 @@ const arePointsEqual = function(pointA, pointB) {
   return pointA.x === pointB.x && pointA.y === pointB.y;
 };
 
+const areLinesEqual = function(lineA, lineB) {
+  const areEndsAEqual = arePointsEqual(lineA.endA, lineB.endA);
+  const areEndsBEqual = arePointsEqual(lineA.endB, lineB.endB);
+  return areEndsAEqual && areEndsBEqual;
+};
+
 const areTypesEqual = function(lineA, lineB) {
   return lineA instanceof Line && lineB instanceof Line;
 };
@@ -17,10 +23,7 @@ class Line {
   }
 
   isEqual(other) {
-    const isTypeEqual = areTypesEqual(this, other);
-    const isEndAEqual = arePointsEqual(this.endA, other.endA);
-    const isEndBEqual = arePointsEqual(this.endB, other.endB);
-    return isTypeEqual && isEndAEqual && isEndBEqual;
+    return areTypesEqual(this, other) && areLinesEqual(this, other);
   }
 }
 
