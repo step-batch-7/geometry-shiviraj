@@ -11,7 +11,6 @@ class Line {
   toString() {
     return `Line (${this.endA.x},${this.endA.y}),(${this.endB.x},${this.endB.y})`;
   }
-
   isEqual(other) {
     const isInstanceOfLine = other instanceof Line;
     if (!isInstanceOfLine) return false;
@@ -20,17 +19,17 @@ class Line {
     return areEndsAEqual && areEndsBEqual;
   }
   get length() {
-    const diffOfX = this.endB.x - this.endA.x;
-    const diffOfY = this.endB.y - this.endA.y;
-    return Math.sqrt(diffOfX ** 2 + diffOfY ** 2);
+    const dX = this.endB.x - this.endA.x;
+    const dY = this.endB.y - this.endA.y;
+    return Math.sqrt(dX ** 2 + dY ** 2);
   }
   get slope() {
-    const diffOfX = this.endB.x - this.endA.x;
-    const diffOfY = this.endB.y - this.endA.y;
-    return diffOfY / diffOfX;
+    const dX = this.endB.x - this.endA.x;
+    const dY = this.endB.y - this.endA.y;
+    return dY / dX;
   }
   isParallelTo(other) {
-    return this.slope === other.slope;
+    return other instanceof Line && this.slope == other.slope;
   }
 }
 
