@@ -1,3 +1,0 @@
-use 'use strict'
-Don't use spread in constructor
-variable name
