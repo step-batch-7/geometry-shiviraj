@@ -77,4 +77,20 @@ describe('Line', () => {
       assert.approximately(actual, 1.16, 0.1);
     });
   });
+
+  describe('Parallel Line', () => {
+    const line1 = new Line({ x: 0, y: 5 }, { x: 5, y: 5 });
+
+    it('Should check if two lines are parallel', () => {
+      const line2 = new Line({ x: 0, y: 0 }, { x: 5, y: 0 });
+      const actual = line1.isParallelTo(line2);
+      assert.deepStrictEqual(actual, true);
+    });
+
+    it('Should check if two lines are not in parallel', () => {
+      const line2 = new Line({ x: 0, y: 0 }, { x: 3, y: 3 });
+      const actual = line1.isParallelTo(line2);
+      assert.deepStrictEqual(actual, false);
+    });
+  });
 });

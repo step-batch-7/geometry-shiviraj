@@ -20,14 +20,17 @@ class Line {
     return areEndsAEqual && areEndsBEqual;
   }
   get length() {
-    const diffOfX = this.endA.x - this.endB.x;
-    const diffOfY = this.endA.y - this.endB.y;
+    const diffOfX = this.endB.x - this.endA.x;
+    const diffOfY = this.endB.y - this.endA.y;
     return Math.sqrt(diffOfX ** 2 + diffOfY ** 2);
   }
   get slope() {
-    const diffOfX = this.endA.x - this.endB.x;
-    const diffOfY = this.endA.y - this.endB.y;
+    const diffOfX = this.endB.x - this.endA.x;
+    const diffOfY = this.endB.y - this.endA.y;
     return diffOfY / diffOfX;
+  }
+  isParallelTo(other) {
+    return this.slope === other.slope;
   }
 }
 
