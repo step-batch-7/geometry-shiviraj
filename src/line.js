@@ -24,6 +24,11 @@ class Line {
     const diffOfY = this.endA.y - this.endB.y;
     return Math.sqrt(diffOfX ** 2 + diffOfY ** 2);
   }
+  get slope() {
+    const diffOfX = this.endA.x - this.endB.x;
+    const diffOfY = this.endA.y - this.endB.y;
+    return diffOfY / diffOfX;
+  }
 }
 
 module.exports = Line;

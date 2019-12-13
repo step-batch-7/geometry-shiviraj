@@ -57,4 +57,24 @@ describe('Line', () => {
       assert.approximately(actual, 5.8, 0.1);
     });
   });
+
+  describe('Slope of Line', () => {
+    it('Should give the slope of line', () => {
+      const line = new Line({ x: 4, y: 6 }, { x: 2, y: 2 });
+      const actual = line.slope;
+      assert.deepStrictEqual(actual, 2);
+    });
+
+    it('Should give the slope of line if points are negative', () => {
+      const line = new Line({ x: -8, y: -9 }, { x: -5, y: -3 });
+      const actual = line.slope;
+      assert.deepStrictEqual(actual, 2);
+    });
+
+    it('Should give the slope of line in decimal', () => {
+      const line = new Line({ x: -9, y: -6 }, { x: -3, y: 1 });
+      const actual = line.slope;
+      assert.approximately(actual, 1.16, 0.1);
+    });
+  });
 });
