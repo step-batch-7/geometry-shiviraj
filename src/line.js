@@ -19,6 +19,11 @@ class Line {
     const areEndsBEqual = arePointsEqual(this.endB, other.endB);
     return areEndsAEqual && areEndsBEqual;
   }
+  get length() {
+    const diffOfX = this.endA.x - this.endB.x;
+    const diffOfY = this.endA.y - this.endB.y;
+    return Math.sqrt(diffOfX ** 2 + diffOfY ** 2);
+  }
 }
 
 module.exports = Line;

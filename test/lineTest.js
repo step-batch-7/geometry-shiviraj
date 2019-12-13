@@ -37,3 +37,11 @@ describe('Equal Lines', () => {
     assert.deepStrictEqual(actual, false);
   });
 });
+
+describe('Length of Line', () => {
+  it('Should give the length of line', () => {
+    const line = new Line({ x: 0, y: 5 }, { x: 0, y: 0 });
+    const actual = line.length;
+    assert.deepStrictEqual(actual, 5);
+  });
+});
