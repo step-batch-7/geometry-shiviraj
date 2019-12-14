@@ -107,4 +107,32 @@ describe('Line', () => {
       assert.isFalse(actual);
     });
   });
+
+  describe('findX', () => {
+    it('Should give the X value', () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 5, y: 5 });
+      const actual = line.findX(3);
+      assert.deepStrictEqual(actual, 3);
+    });
+
+    it('Should give the X value outside of line ', () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 5, y: 5 });
+      const actual = line.findX(9);
+      assert.deepStrictEqual(actual, 9);
+    });
+  });
+
+  describe('findY', () => {
+    it('Should give the Y value', () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 5, y: 5 });
+      const actual = line.findY(3);
+      assert.deepStrictEqual(actual, 3);
+    });
+
+    it('Should give the Y value outside of line ', () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 5, y: 5 });
+      const actual = line.findY(9);
+      assert.deepStrictEqual(actual, 9);
+    });
+  });
 });

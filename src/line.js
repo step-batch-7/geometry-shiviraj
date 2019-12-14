@@ -34,6 +34,12 @@ class Line {
     const d = (c1 - c2) / Math.sqrt(1 + this.slope ** 2);
     return this.slope == other.slope && d != 0;
   }
+  findX(y) {
+    return (y - this.endA.y) / this.slope + this.endA.x;
+  }
+  findY(x) {
+    return (x - this.endA.x) * this.slope + this.endA.y;
+  }
 }
 
 module.exports = Line;
