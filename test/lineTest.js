@@ -22,19 +22,26 @@ describe('Line', () => {
 
     it('Should check if lines are equal', () => {
       const line2 = new Line({ x: 2, y: 3 }, { x: 5, y: 9 });
-      const actual = line1.isEqual(line2);
+      const actual = line1.isEqualTo(line2);
       assert.isTrue(actual);
     });
 
     it('Should check if lines are not equal', () => {
       const line2 = new Line({ x: 2, y: 5 }, { x: 5, y: 3 });
-      const actual = line1.isEqual(line2);
+      const actual = line1.isEqualTo(line2);
       assert.isFalse(actual);
     });
 
     it('Should check for if lines are not same type', () => {
-      const actual = line1.isEqual('line2');
+      const actual = line1.isEqualTo('line2');
       assert.isFalse(actual);
+    });
+
+    it('Should check if lines have same ends point', () => {
+      const line1 = new Line({ x: 2, y: 5 }, { x: 5, y: 3 });
+      const line2 = new Line({ x: 2, y: 5 }, { x: 5, y: 3 });
+      const actual = line1.isEqualTo(line2);
+      assert.isTrue(actual);
     });
   });
 

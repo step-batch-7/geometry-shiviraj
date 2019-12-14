@@ -11,7 +11,7 @@ class Line {
   toString() {
     return `[Line (${this.endA.x},${this.endA.y}) to (${this.endB.x},${this.endB.y})]`;
   }
-  isEqual(other) {
+  isEqualTo(other) {
     if (!(other instanceof Line)) return false;
     const areEndsAEqual = arePointsEqual(this.endA, other.endA);
     const areEndsBEqual = arePointsEqual(this.endB, other.endB);
