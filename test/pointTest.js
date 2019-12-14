@@ -29,4 +29,25 @@ describe('Point', () => {
       assert.deepStrictEqual(actual, 6);
     });
   });
+
+  describe('Equal Points', () => {
+    const point1 = new Point(2, 3);
+
+    it('Should check if points are equal', () => {
+      const point2 = new Point(2, 3);
+      const actual = point1.isEqualTo(point2);
+      assert.isTrue(actual);
+    });
+
+    it('Should check if points are not equal', () => {
+      const point2 = new Point(2, 5);
+      const actual = point1.isEqualTo(point2);
+      assert.isFalse(actual);
+    });
+
+    it('Should check for if points are not same type', () => {
+      const actual = point1.isEqualTo('point2');
+      assert.isFalse(actual);
+    });
+  });
 });
