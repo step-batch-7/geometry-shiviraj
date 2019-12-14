@@ -6,13 +6,13 @@ describe('Line', () => {
     it('Should give line representation of positive points', () => {
       const testLine = new Line({ x: 2, y: 5 }, { x: 4, y: 6 });
       const actual = testLine.toString();
-      const expected = 'Line (2,5),(4,6)';
+      const expected = '[Line (2,5) to (4,6)]';
       assert.deepStrictEqual(actual, expected);
     });
     it('Should give line representation of negative points', () => {
       const testLine = new Line({ x: 2, y: -5 }, { x: -4, y: 6 });
       const actual = testLine.toString();
-      const expected = 'Line (2,-5),(-4,6)';
+      const expected = '[Line (2,-5) to (-4,6)]';
       assert.deepStrictEqual(actual, expected);
     });
   });
