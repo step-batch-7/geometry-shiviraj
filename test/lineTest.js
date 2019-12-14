@@ -79,22 +79,30 @@ describe('Line', () => {
   });
 
   describe('Parallel Line', () => {
-    const line1 = new Line({ x: 0, y: 5 }, { x: 5, y: 5 });
-
     it('Should check if two lines are parallel', () => {
+      const line1 = new Line({ x: 0, y: 5 }, { x: 5, y: 5 });
       const line2 = new Line({ x: 0, y: 0 }, { x: 5, y: 0 });
       const actual = line1.isParallelTo(line2);
       assert.isTrue(actual);
     });
 
     it('Should check if two lines are not in parallel', () => {
+      const line1 = new Line({ x: 0, y: 5 }, { x: 5, y: 5 });
       const line2 = new Line({ x: 0, y: 0 }, { x: 3, y: 3 });
       const actual = line1.isParallelTo(line2);
       assert.isFalse(actual);
     });
 
     it('Should check if one is not a Line object', () => {
+      const line1 = new Line({ x: 0, y: 5 }, { x: 5, y: 5 });
       const line2 = { endA: { x: 0, y: 0 }, endB: { x: 3, y: 3 }, slope: 0 };
+      const actual = line1.isParallelTo(line2);
+      assert.isFalse(actual);
+    });
+
+    it('Should check if line is overlapped', () => {
+      const line1 = new Line({ x: 0, y: 0 }, { x: 5, y: 0 });
+      const line2 = new Line({ x: 2, y: 0 }, { x: 4, y: 0 });
       const actual = line1.isParallelTo(line2);
       assert.isFalse(actual);
     });
