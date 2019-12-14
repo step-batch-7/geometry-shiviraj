@@ -50,4 +50,12 @@ describe('Point', () => {
       assert.isFalse(actual);
     });
   });
+
+  describe('Clone Point', () => {
+    it('Should check if clone point is same as original point', () => {
+      const point1 = new Point(2, 3);
+      const point2 = point1.clone();
+      assert.deepStrictEqual(point1, point2);
+    });
+  });
 });
