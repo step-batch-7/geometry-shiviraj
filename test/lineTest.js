@@ -180,4 +180,13 @@ describe('Line', () => {
       assert.isFalse(actual);
     });
   });
+
+  describe('Distance from Point', () => {
+    it('Should give shortest distance between a point and Line', () => {
+      const line = new Line({ x: 0, y: 5 }, { x: 5, y: 5 });
+      const point = new Point(0, 0);
+      const actual = line.distanceFromPoint(point);
+      assert.deepStrictEqual(actual, 5);
+    });
+  });
 });

@@ -29,15 +29,17 @@ class Line {
     const dY = this.endB.y - this.endA.y;
     return dY / dX;
   }
-  get distOnYAxis() {
-    return this.endA.y - this.slope * this.endA.x;
+  distanceFromPoint(point) {
+    return Math.abs(
+      (-this.slope * point.x + point.y - this.distOnYAxis) /
+        Math.hypot(1, this.slope)
+    );
   }
   isParallelTo(other) {
     if (!(other instanceof Line)) return false;
-    const c1 = this.distOnYAxis;
-    const c2 = other.endA.y - other.slope * other.endA.x;
-    const d = (c1 - c2) / Math.sqrt(1 + this.slope ** 2);
-    return this.slope == other.slope && d != 0;
+    const endPointOfLine = new Point(this.endA.x, this.endA.y);
+    const distance = other.distanceFromPoint(endPointOfLine);
+    return this.slope === other.slope && distance != 0;
   }
   findX(y) {
     let resultX = (y - this.endA.y) / this.slope + this.endA.x;
@@ -59,6 +61,9 @@ class Line {
     const line1 = new Line(this.endA, middlePoint);
     const line2 = new Line(middlePoint, this.endB);
     return [line1, line2];
+  }
+  get distOnYAxis() {
+    return this.endA.y - this.slope * this.endA.x;
   }
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
