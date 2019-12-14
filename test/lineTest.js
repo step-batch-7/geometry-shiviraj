@@ -118,7 +118,7 @@ describe('Line', () => {
     it('Should give the X value outside of line ', () => {
       const line = new Line({ x: 0, y: 0 }, { x: 5, y: 5 });
       const actual = line.findX(9);
-      assert.deepStrictEqual(actual, 9);
+      assert.isNaN(actual);
     });
   });
 
@@ -132,7 +132,7 @@ describe('Line', () => {
     it('Should give the Y value outside of line ', () => {
       const line = new Line({ x: 0, y: 0 }, { x: 5, y: 5 });
       const actual = line.findY(9);
-      assert.deepStrictEqual(actual, 9);
+      assert.isNaN(actual);
     });
   });
 });

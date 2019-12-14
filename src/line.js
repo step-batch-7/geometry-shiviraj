@@ -35,10 +35,14 @@ class Line {
     return this.slope == other.slope && d != 0;
   }
   findX(y) {
-    return (y - this.endA.y) / this.slope + this.endA.x;
+    let resultX = (y - this.endA.y) / this.slope + this.endA.x;
+    if (resultX < this.endA.x || resultX > this.endB.x) resultX = NaN;
+    return resultX;
   }
   findY(x) {
-    return (x - this.endA.x) * this.slope + this.endA.y;
+    let resultY = (x - this.endA.x) * this.slope + this.endA.y;
+    if (resultY < this.endA.x || resultY > this.endB.x) resultY = NaN;
+    return resultY;
   }
 }
 
