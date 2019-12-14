@@ -44,6 +44,17 @@ class Line {
     if (resultY < this.endA.x || resultY > this.endB.x) resultY = NaN;
     return resultY;
   }
+  get middlePointOfLine() {
+    const middleOfX = (this.endA.x + this.endB.x) / 2;
+    const middleOfY = (this.endA.y + this.endB.y) / 2;
+    return { x: middleOfX, y: middleOfY };
+  }
+  split() {
+    const middlePoint = this.middlePointOfLine;
+    const line1 = new Line(this.endA, middlePoint);
+    const line2 = new Line(middlePoint, this.endB);
+    return [line1, line2];
+  }
 }
 
 module.exports = Line;

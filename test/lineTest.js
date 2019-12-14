@@ -142,4 +142,14 @@ describe('Line', () => {
       assert.isNaN(actual);
     });
   });
+
+  describe('Split Line', () => {
+    it('Should give two lines split at center', () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 5, y: 5 });
+      const actual = line.split();
+      const line1 = new Line({ x: 0, y: 0 }, { x: 2.5, y: 2.5 });
+      const line2 = new Line({ x: 2.5, y: 2.5 }, { x: 5, y: 5 });
+      assert.deepStrictEqual(actual, [line1, line2]);
+    });
+  });
 });
