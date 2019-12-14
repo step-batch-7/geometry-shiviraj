@@ -1,5 +1,6 @@
 const assert = require('chai').assert;
-const Line = require('../src/line.js');
+const Line = require('../src/line');
+const Point = require('../src/point');
 
 describe('Line', () => {
   describe('toString', () => {
@@ -150,6 +151,33 @@ describe('Line', () => {
       const line1 = new Line({ x: 0, y: 0 }, { x: 2.5, y: 2.5 });
       const line2 = new Line({ x: 2.5, y: 2.5 }, { x: 5, y: 5 });
       assert.deepStrictEqual(actual, [line1, line2]);
+    });
+  });
+
+  describe('has Point', () => {
+    const line = new Line({ x: 0, y: 0 }, { x: 5, y: 5 });
+
+    it('Should give true if point is on Line', () => {
+      const point = new Point(2, 2);
+      const actual = line.hasPoint(point);
+      assert.isTrue(actual);
+    });
+
+    it('Should give false if point is not on Line', () => {
+      const point = new Point(1, 2);
+      const actual = line.hasPoint(point);
+      assert.isFalse(actual);
+    });
+
+    it('Should give true if point is outside of line', () => {
+      const point = new Point(7, 7);
+      const actual = line.hasPoint(point);
+      assert.isTrue(actual);
+    });
+
+    it('Should give false if point is not type of Point', () => {
+      const actual = line.hasPoint('point');
+      assert.isFalse(actual);
     });
   });
 });

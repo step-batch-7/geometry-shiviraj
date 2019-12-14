@@ -1,3 +1,5 @@
+const Point = require('./point');
+
 const arePointsEqual = function(pointA, pointB) {
   return pointA.x === pointB.x && pointA.y === pointB.y;
 };
@@ -27,9 +29,12 @@ class Line {
     const dY = this.endB.y - this.endA.y;
     return dY / dX;
   }
+  get distOnYAxis() {
+    return this.endA.y - this.slope * this.endA.x;
+  }
   isParallelTo(other) {
     if (!(other instanceof Line)) return false;
-    const c1 = this.endA.y - this.slope * this.endA.x;
+    const c1 = this.distOnYAxis;
     const c2 = other.endA.y - other.slope * other.endA.x;
     const d = (c1 - c2) / Math.sqrt(1 + this.slope ** 2);
     return this.slope == other.slope && d != 0;
@@ -54,6 +59,10 @@ class Line {
     const line1 = new Line(this.endA, middlePoint);
     const line2 = new Line(middlePoint, this.endB);
     return [line1, line2];
+  }
+  hasPoint(point) {
+    if (!(point instanceof Point)) return false;
+    return point.y === this.slope * point.x + this.distOnYAxis;
   }
 }
 
