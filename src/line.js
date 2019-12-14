@@ -11,7 +11,9 @@ class Line {
   }
 
   toString() {
-    return `[Line (${this.endA.x},${this.endA.y}) to (${this.endB.x},${this.endB.y})]`;
+    const pointA = `(${this.endA.x},${this.endA.y})`;
+    const pointB = `(${this.endB.x},${this.endB.y})`;
+    return `[Line ${pointA} to ${pointB}]`;
   }
   isEqualTo(other) {
     if (!(other instanceof Line)) return false;
@@ -29,6 +31,9 @@ class Line {
     const dY = this.endB.y - this.endA.y;
     return dY / dX;
   }
+  get distOnYAxis() {
+    return this.endA.y - this.slope * this.endA.x;
+  }
   distanceFromPoint(point) {
     return Math.abs(
       (-this.slope * point.x + point.y - this.distOnYAxis) /
@@ -42,14 +47,20 @@ class Line {
     return this.slope === other.slope && distance != 0;
   }
   findX(y) {
-    let resultX = (y - this.endA.y) / this.slope + this.endA.x;
-    if (resultX < this.endA.x || resultX > this.endB.x) resultX = NaN;
-    return resultX;
+    let X = (y - this.endA.y) / this.slope + this.endA.x;
+    const isXOutsideOfLine =
+      (X < this.endA.x || X > this.endB.x) &&
+      (X > this.endA.x || X < this.endB.x);
+    if (isXOutsideOfLine) X = NaN;
+    return X;
   }
   findY(x) {
-    let resultY = (x - this.endA.x) * this.slope + this.endA.y;
-    if (resultY < this.endA.x || resultY > this.endB.x) resultY = NaN;
-    return resultY;
+    let Y = (x - this.endA.x) * this.slope + this.endA.y;
+    const isYOutsideOfLine =
+      (Y < this.endA.y || Y > this.endB.y) &&
+      (Y > this.endA.y || Y < this.endB.y);
+    if (isYOutsideOfLine) Y = NaN;
+    return Y;
   }
   get middlePointOfLine() {
     const middleOfX = (this.endA.x + this.endB.x) / 2;
@@ -61,9 +72,6 @@ class Line {
     const line1 = new Line(this.endA, middlePoint);
     const line2 = new Line(middlePoint, this.endB);
     return [line1, line2];
-  }
-  get distOnYAxis() {
-    return this.endA.y - this.slope * this.endA.x;
   }
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
