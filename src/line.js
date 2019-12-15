@@ -39,10 +39,16 @@ class Line {
   get yIntercept() {
     return this.endA.y - this.slope * this.endA.x;
   }
+  distanceFromPoint(point) {
+    return Math.abs(
+      (-this.slope * point.x + point.y - this.yIntercept) / hypot(1, this.slope)
+    );
+  }
   isParallelTo(other) {
-    if (!(other instanceof Line) || this.yIntercept == other.yIntercept)
-      return false;
-    return this.slope === other.slope;
+    if (!(other instanceof Line)) return false;
+    const endPointOfLine = new Point(this.endA.x, this.endA.y);
+    const distance = other.distanceFromPoint(endPointOfLine);
+    return this.slope === other.slope && distance != 0;
   }
   findX(y) {
     let X = (y - this.endA.y) / this.slope + this.endA.x;
