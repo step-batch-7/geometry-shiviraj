@@ -1,7 +1,12 @@
+const { min, max, hypot } = Math;
 const Point = require('./point');
 
 const arePointsEqual = function(pointA, pointB) {
   return pointA.x === pointB.x && pointA.y === pointB.y;
+};
+
+const isBetween = function(range1, range2, no) {
+  return min(range1, range2) <= no && no <= max(range1, range2);
 };
 
 class Line {
@@ -24,58 +29,44 @@ class Line {
   get length() {
     const dX = this.endB.x - this.endA.x;
     const dY = this.endB.y - this.endA.y;
-    return Math.hypot(dX, dY);
+    return hypot(dX, dY);
   }
   get slope() {
     const dX = this.endB.x - this.endA.x;
     const dY = this.endB.y - this.endA.y;
     return dY / dX;
   }
-  get distOnYAxis() {
+  get yIntercept() {
     return this.endA.y - this.slope * this.endA.x;
   }
-  distanceFromPoint(point) {
-    return Math.abs(
-      (-this.slope * point.x + point.y - this.distOnYAxis) /
-        Math.hypot(1, this.slope)
-    );
-  }
   isParallelTo(other) {
-    if (!(other instanceof Line)) return false;
-    const endPointOfLine = new Point(this.endA.x, this.endA.y);
-    const distance = other.distanceFromPoint(endPointOfLine);
-    return this.slope === other.slope && distance != 0;
+    if (!(other instanceof Line) || this.yIntercept == other.yIntercept)
+      return false;
+    return this.slope === other.slope;
   }
   findX(y) {
     let X = (y - this.endA.y) / this.slope + this.endA.x;
-    const isXOutsideOfLine =
-      (X < this.endA.x || X > this.endB.x) &&
-      (X > this.endA.x || X < this.endB.x);
-    if (isXOutsideOfLine) X = NaN;
+    if (!isBetween(this.endA.x, this.endB.x, X)) X = NaN;
     return X;
   }
   findY(x) {
     let Y = (x - this.endA.x) * this.slope + this.endA.y;
-    const isYOutsideOfLine =
-      (Y < this.endA.y || Y > this.endB.y) &&
-      (Y > this.endA.y || Y < this.endB.y);
-    if (isYOutsideOfLine) Y = NaN;
+    if (!isBetween(this.endA.y, this.endB.y, Y)) Y = NaN;
     return Y;
   }
-  get middlePointOfLine() {
+  get midPoint() {
     const middleOfX = (this.endA.x + this.endB.x) / 2;
     const middleOfY = (this.endA.y + this.endB.y) / 2;
     return { x: middleOfX, y: middleOfY };
   }
   split() {
-    const middlePoint = this.middlePointOfLine;
-    const line1 = new Line(this.endA, middlePoint);
-    const line2 = new Line(middlePoint, this.endB);
+    const line1 = new Line(this.endA, this.midPoint);
+    const line2 = new Line(this.midPoint, this.endB);
     return [line1, line2];
   }
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
-    return point.y === this.slope * point.x + this.distOnYAxis;
+    return this.findX(point.y) === point.x && this.findY(point.x) === point.y;
   }
 }
 

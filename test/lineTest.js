@@ -38,7 +38,7 @@ describe('Line', () => {
       assert.isFalse(actual);
     });
 
-    it('Should check if lines have same ends point', () => {
+    it('Should check if lines have same end points', () => {
       const line1 = new Line({ x: 2, y: 5 }, { x: 5, y: 3 });
       const line2 = new Line({ x: 2, y: 5 }, { x: 5, y: 3 });
       const actual = line1.isEqualTo(line2);
@@ -169,24 +169,15 @@ describe('Line', () => {
       assert.isFalse(actual);
     });
 
-    it('Should give true if point is outside of line', () => {
+    it('Should give false if point is outside of line', () => {
       const point = new Point(7, 7);
       const actual = line.hasPoint(point);
-      assert.isTrue(actual);
+      assert.isFalse(actual);
     });
 
     it('Should give false if point is not type of Point', () => {
       const actual = line.hasPoint('point');
       assert.isFalse(actual);
-    });
-  });
-
-  describe('Distance from Point', () => {
-    it('Should give shortest distance between a point and Line', () => {
-      const line = new Line({ x: 0, y: 5 }, { x: 5, y: 5 });
-      const point = new Point(0, 0);
-      const actual = line.distanceFromPoint(point);
-      assert.deepStrictEqual(actual, 5);
     });
   });
 });
