@@ -1,5 +1,5 @@
 const Point = require('./point');
-const PI = 22 / 7;
+const { PI } = Math;
 
 class Circle {
   constructor(centre, radius) {

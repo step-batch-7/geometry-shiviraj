@@ -35,14 +35,14 @@ describe('Circle', () => {
   describe('Area', () => {
     it('Should give the area of circle', () => {
       const circle = new Circle({ x: 2, y: 3 }, 7);
-      assert.deepStrictEqual(circle.area, 154);
+      assert.approximately(circle.area, 154, 0.1);
     });
   });
 
   describe('Perimeter', () => {
     it('Should give the perimeter of circle', () => {
       const circle = new Circle({ x: 2, y: 3 }, 7);
-      assert.deepStrictEqual(circle.perimeter, 44);
+      assert.approximately(circle.perimeter, 44, 0.1);
     });
   });
 });

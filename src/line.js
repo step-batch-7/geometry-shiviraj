@@ -1,18 +1,14 @@
 const Point = require('./point');
 const { min, max, hypot } = Math;
 
-const arePointsEqual = function(pointA, pointB) {
-  return pointA.x === pointB.x && pointA.y === pointB.y;
-};
-
 const isBetween = function(start, end, no) {
   return min(start, end) <= no && no <= max(start, end);
 };
 
 class Line {
   constructor(endA, endB) {
-    this.endA = { x: endA.x, y: endA.y };
-    this.endB = { x: endB.x, y: endB.y };
+    this.endA = new Point(endA.x, endA.y);
+    this.endB = new Point(endB.x, endB.y);
   }
 
   toString() {
@@ -22,8 +18,8 @@ class Line {
   }
   isEqualTo(other) {
     if (!(other instanceof Line)) return false;
-    const areEndsAEqual = arePointsEqual(this.endA, other.endA);
-    const areEndsBEqual = arePointsEqual(this.endB, other.endB);
+    const areEndsAEqual = this.endA.isEqualTo(other.endA);
+    const areEndsBEqual = this.endB.isEqualTo(other.endB);
     return areEndsAEqual && areEndsBEqual;
   }
   get length() {
