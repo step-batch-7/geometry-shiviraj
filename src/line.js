@@ -62,7 +62,7 @@ class Line {
   get midPoint() {
     const middleOfX = (this.endA.x + this.endB.x) / 2;
     const middleOfY = (this.endA.y + this.endB.y) / 2;
-    return { x: middleOfX, y: middleOfY };
+    return new Point(middleOfX, middleOfY);
   }
   split() {
     const line1 = new Line(this.endA, this.midPoint);
