@@ -79,6 +79,9 @@ class Line {
     const Y = (dist * this.endB.y + restDist * this.endA.y) / this.length; 
     return new Point(X, Y);
   }
+  findPointFromEnd(dist) {
+    return this.findPointFromStart(this.length - dist);
+  }
 }
 
 module.exports = Line;

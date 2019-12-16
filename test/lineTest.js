@@ -203,4 +203,27 @@ describe('Line', () => {
       assert.approximately(actual.y, 1.41, 0.1);
     });
   });
+
+  describe('findPointFromEnd', () => {
+    it('Should give a point from the End point on x axis', () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 5, y: 0 });
+      const actual = line.findPointFromEnd(2);
+      const expected = new Point(3, 0);
+      assert.deepStrictEqual(actual, expected);
+    });
+
+    it('Should give a point from the End point on y axis', () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 0, y: 5 });
+      const actual = line.findPointFromEnd(2);
+      const expected = new Point(0, 3);
+      assert.deepStrictEqual(actual, expected);
+    });
+
+    it('Should give a point from the End point on x and y axis', () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 5, y: 5 });
+      const actual = line.findPointFromEnd(2);
+      assert.approximately(actual.x, 3.59, 0.1);
+      assert.approximately(actual.y, 3.59, 0.1);
+    });
+  });
 });
