@@ -74,10 +74,10 @@ class Line {
     return this.findX(point.y) === point.x && this.findY(point.x) === point.y;
   }
   findPointFromStart(dist) {
-    if(!isBetween(0, this.length, dist)) return null;
+    if (!isBetween(0, this.length, dist)) return null;
     const distRatio = dist / this.length;
-    const X = (distRatio * this.endB.x + (1 - distRatio) * this.endA.x); 
-    const Y = (distRatio * this.endB.y + (1 - distRatio) * this.endA.y); 
+    const X = distRatio * this.endB.x + (1 - distRatio) * this.endA.x;
+    const Y = distRatio * this.endB.y + (1 - distRatio) * this.endA.y;
     return new Point(X, Y);
   }
   findPointFromEnd(dist) {
