@@ -1,6 +1,7 @@
 const assert = require('chai').assert;
-const Line = require('../src/line');
 const Point = require('../src/point');
+const Line = require('../src/line');
+const Circle = require('../src/circle');
 
 describe('Point', () => {
   describe('to String', () => {
@@ -68,7 +69,7 @@ describe('Point', () => {
     });
   });
 
-  describe('is On', () => {
+  describe('is On Line', () => {
     const line = new Line({ x: 0, y: 0 }, { x: 5, y: 5 });
 
     it('Should give true if point is on line', () => {
@@ -84,6 +85,25 @@ describe('Point', () => {
     it('Should give false if point is outside of line', () => {
       const point = new Point(6, 6);
       assert.isFalse(point.isOn(line));
+    });
+  });
+
+  describe('is On Circle', () => {
+    const circle = new Circle({ x: 0, y: 0 }, 5);
+
+    it('Should give true if point is on circle', () => {
+      const point = new Point(0, 5);
+      assert.isTrue(point.isOn(circle));
+    });
+
+    it('Should give false if point is not on circle', () => {
+      const point = new Point(2, 3);
+      assert.isFalse(point.isOn(circle));
+    });
+
+    it('Should give false if point is outside of circle', () => {
+      const point = new Point(6, 6);
+      assert.isFalse(point.isOn(circle));
     });
   });
 });
