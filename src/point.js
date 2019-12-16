@@ -1,3 +1,6 @@
+{
+}
+
 class Point {
   constructor(x, y) {
     this.x = x;
@@ -15,6 +18,11 @@ class Point {
   }
   clone() {
     return new Point(this.x, this.y);
+  }
+  findDistanceTo(other) {
+    const dX = other.x - this.x;
+    const dY = other.y - this.y;
+    return Math.hypot(dX, dY);
   }
 }
 

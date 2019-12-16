@@ -27,9 +27,8 @@ class Line {
     return areEndsAEqual && areEndsBEqual;
   }
   get length() {
-    const dX = this.endB.x - this.endA.x;
-    const dY = this.endB.y - this.endA.y;
-    return hypot(dX, dY);
+    const point = new Point(this.endA.x, this.endA.y);
+    return point.findDistanceTo(this.endB);
   }
   get slope() {
     const dX = this.endB.x - this.endA.x;

@@ -58,4 +58,12 @@ describe('Point', () => {
       assert.deepStrictEqual(point1, point2);
     });
   });
+
+  describe('findDistance', () => {
+    it('Should distance between two point', () => {
+      const point1 = new Point(0, 0);
+      const point2 = new Point(0, 5);
+      assert.deepStrictEqual(point1.findDistanceTo(point2), 5);
+    });
+  });
 });
