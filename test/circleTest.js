@@ -1,5 +1,6 @@
 const assert = require('chai').assert;
 const Circle = require('../src/circle');
+const Point = require('../src/point');
 
 describe('Circle', () => {
   describe('to String', () => {
@@ -43,6 +44,33 @@ describe('Circle', () => {
     it('Should give the perimeter of circle', () => {
       const circle = new Circle({ x: 2, y: 3 }, 7);
       assert.approximately(circle.perimeter, 44, 0.1);
+    });
+  });
+
+  describe('has Point', () => {
+    const circle = new Circle({ x: 0, y: 0 }, 5);
+
+    it('Should give true if point is on Circle', () => {
+      const point = new Point(0, 5);
+      const actual = circle.hasPoint(point);
+      assert.isTrue(actual);
+    });
+
+    it('Should give false if point is not on Circle', () => {
+      const point = new Point(1, 2);
+      const actual = circle.hasPoint(point);
+      assert.isFalse(actual);
+    });
+
+    it('Should give false if point is outside of circle', () => {
+      const point = new Point(7, 7);
+      const actual = circle.hasPoint(point);
+      assert.isFalse(actual);
+    });
+
+    it('Should give false if point is not type of Point', () => {
+      const actual = circle.hasPoint('point');
+      assert.isFalse(actual);
     });
   });
 });

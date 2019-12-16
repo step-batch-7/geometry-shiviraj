@@ -13,14 +13,20 @@ class Circle {
   isEqualTo(other) {
     if (!(other instanceof Circle)) return false;
     const areCentreEqual = this.centre.isEqualTo(other.centre);
-    const areRadiusEqual = this.radius === other.radius;
-    return areCentreEqual && areRadiusEqual;
+    return areCentreEqual && this.radius === other.radius;
   }
   get area() {
     return PI * this.radius ** 2;
   }
   get perimeter() {
     return 2 * PI * this.radius;
+  }
+  hasPoint(point) {
+    if (!(point instanceof Point)) return false;
+    return (
+      this.radius ** 2 ===
+      (point.x - this.centre.x) ** 2 + (point.y - this.centre.y) ** 2
+    );
   }
 }
 
