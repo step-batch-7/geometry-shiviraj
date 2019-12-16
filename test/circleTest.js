@@ -38,4 +38,11 @@ describe('Circle', () => {
       assert.deepStrictEqual(circle.area, 154);
     });
   });
+
+  describe('Perimeter', () => {
+    it('Should give the perimeter of circle', () => {
+      const circle = new Circle({ x: 2, y: 3 }, 7);
+      assert.deepStrictEqual(circle.perimeter, 44);
+    });
+  });
 });
