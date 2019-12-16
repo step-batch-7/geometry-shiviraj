@@ -1,4 +1,5 @@
 const Point = require('./point');
+const PI = 22 / 7;
 
 class Circle {
   constructor(centre, radius) {
@@ -14,6 +15,9 @@ class Circle {
     const areCentreEqual = this.centre.isEqualTo(other.centre);
     const areRadiusEqual = this.radius === other.radius;
     return areCentreEqual && areRadiusEqual;
+  }
+  get area() {
+    return PI * this.radius ** 2;
   }
 }
 

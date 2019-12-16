@@ -31,4 +31,11 @@ describe('Circle', () => {
       assert.isFalse(actual);
     });
   });
+
+  describe('Area', () => {
+    it('Should give the area of circle', () => {
+      const circle = new Circle({ x: 2, y: 3 }, 7);
+      assert.deepStrictEqual(circle.area, 154);
+    });
+  });
 });
