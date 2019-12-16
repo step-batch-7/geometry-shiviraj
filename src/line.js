@@ -73,6 +73,12 @@ class Line {
     if (!(point instanceof Point)) return false;
     return this.findX(point.y) === point.x && this.findY(point.x) === point.y;
   }
+  findPointFromStart(dist) {
+    const restDist = this.length - dist;
+    const X = (dist * this.endB.x + restDist * this.endA.x) / this.length; 
+    const Y = (dist * this.endB.y + restDist * this.endA.y) / this.length; 
+    return new Point(X, Y);
+  }
 }
 
 module.exports = Line;

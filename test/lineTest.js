@@ -180,4 +180,27 @@ describe('Line', () => {
       assert.isFalse(actual);
     });
   });
+
+  describe('findPointFromStart', () => {
+    it('Should give a point from the starting point on x axis', () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 5, y: 0 });
+      const actual = line.findPointFromStart(2);
+      const expected = new Point(2, 0);
+      assert.deepStrictEqual(actual, expected);
+    });
+
+    it('Should give a point from the starting point on y axis', () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 0, y: 5 });
+      const actual = line.findPointFromStart(2);
+      const expected = new Point(0, 2);
+      assert.deepStrictEqual(actual, expected);
+    });
+
+    it('Should give a point from the starting point on x and y axis', () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 5, y: 5 });
+      const actual = line.findPointFromStart(2);
+      assert.approximately(actual.x, 1.41, 0.1);
+      assert.approximately(actual.y, 1.41, 0.1);
+    });
+  });
 });
