@@ -1,12 +1,12 @@
-const { min, max, hypot } = Math;
 const Point = require('./point');
+const { min, max, hypot } = Math;
 
 const arePointsEqual = function(pointA, pointB) {
   return pointA.x === pointB.x && pointA.y === pointB.y;
 };
 
-const isBetween = function(range1, range2, no) {
-  return min(range1, range2) <= no && no <= max(range1, range2);
+const isBetween = function(start, end, no) {
+  return min(start, end) <= no && no <= max(start, end);
 };
 
 class Line {
@@ -74,9 +74,10 @@ class Line {
     return this.findX(point.y) === point.x && this.findY(point.x) === point.y;
   }
   findPointFromStart(dist) {
-    const restDist = this.length - dist;
-    const X = (dist * this.endB.x + restDist * this.endA.x) / this.length; 
-    const Y = (dist * this.endB.y + restDist * this.endA.y) / this.length; 
+    if(!isBetween(0, this.length, dist)) return null;
+    const distRatio = dist / this.length;
+    const X = (distRatio * this.endB.x + (1 - distRatio) * this.endA.x); 
+    const Y = (distRatio * this.endB.y + (1 - distRatio) * this.endA.y); 
     return new Point(X, Y);
   }
   findPointFromEnd(dist) {

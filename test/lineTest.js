@@ -202,6 +202,12 @@ describe('Line', () => {
       assert.approximately(actual.x, 1.41, 0.1);
       assert.approximately(actual.y, 1.41, 0.1);
     });
+
+    it('Should give null if distance is more than line length', () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 0, y: 5 });
+      const actual = line.findPointFromStart(6);
+      assert.isNull(actual);
+    });
   });
 
   describe('findPointFromEnd', () => {
@@ -224,6 +230,12 @@ describe('Line', () => {
       const actual = line.findPointFromEnd(2);
       assert.approximately(actual.x, 3.59, 0.1);
       assert.approximately(actual.y, 3.59, 0.1);
+    });
+
+    it('Should give null if distance is more than line length', () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 0, y: 5 });
+      const actual = line.findPointFromEnd(6);
+      assert.isNull(actual);
     });
   });
 });
