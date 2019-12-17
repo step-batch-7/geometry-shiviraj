@@ -5,6 +5,7 @@ class Rectangle {
   constructor(endA, endC) {
     this.endA = new Point(endA.x, endA.y);
     this.endC = new Point(endC.x, endC.y);
+    this.diagonal = new Line(this.endA, this.endC);
   }
   toString() {
     const endA = `(${this.endA.x},${this.endA.y})`;
@@ -19,6 +20,13 @@ class Rectangle {
   }
   get area() {
     return this.height.length * this.width.length;
+  }
+  get perimeter() {
+    return 2 * (this.height.length + this.width.length);
+  }
+  isEqualTo(other) {
+    if (!(other instanceof Rectangle)) return false;
+    return this.diagonal.length === other.diagonal.length;
   }
 }
 module.exports = Rectangle;
