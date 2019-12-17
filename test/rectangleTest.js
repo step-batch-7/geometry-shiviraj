@@ -84,4 +84,27 @@ describe('Rectangle', () => {
       assert.isFalse(actual);
     });
   });
+
+  describe('Covers', () => {
+    const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 5, y: 5 });
+
+    it('Should give true if point is inside the Rectangle', () => {
+      const point = new Point(0, 3);
+      assert.isTrue(rectangle.covers(point));
+    });
+
+    it('Should give true if point is on the Rectangle', () => {
+      const point = new Point(0, 5);
+      assert.isTrue(rectangle.covers(point));
+    });
+
+    it('Should give false if point is outside of rectangle', () => {
+      const point = new Point(7, 7);
+      assert.isFalse(rectangle.covers(point));
+    });
+
+    it('Should give false if point is not type of Point', () => {
+      assert.isFalse(rectangle.covers('point'));
+    });
+  });
 });

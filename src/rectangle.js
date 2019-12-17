@@ -1,6 +1,10 @@
 const Point = require('./point');
 const Line = require('./line');
 
+const isBetween = function(start, end, no) {
+  return Math.min(start, end) <= no && no <= Math.max(start, end);
+};
+
 class Rectangle {
   constructor(endA, endC) {
     this.endA = new Point(endA.x, endA.y);
@@ -36,6 +40,12 @@ class Rectangle {
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
     return this.sides.some(side => point.isOn(side) == true);
+  }
+  covers(point) {
+    if (!(point instanceof Point)) return false;
+    const isXInRange = isBetween(this.endA.x, this.endC.x, point.x);
+    const isYInRange = isBetween(this.endA.y, this.endC.y, point.y);
+    return isXInRange && isYInRange;
   }
 }
 module.exports = Rectangle;
