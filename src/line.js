@@ -50,13 +50,11 @@ class Line {
   }
   findX(y) {
     if (isNotInRange(this.endA.y, this.endB.y, y)) return NaN;
-    let X = (y - this.endA.y) / this.slope + this.endA.x;
-    return this.slope != 0 ? X : this.endA.x;
+    return (y - this.endA.y) / this.slope + this.endA.x;
   }
   findY(x) {
     if (isNotInRange(this.endA.x, this.endB.x, x)) return NaN;
-    let Y = (x - this.endA.x) * this.slope + this.endA.y;
-    return this.slope != Infinity ? Y : this.endA.y;
+    return (x - this.endA.x) * this.slope + this.endA.y;
   }
   get midPoint() {
     const middleOfX = (this.endA.x + this.endB.x) / 2;
