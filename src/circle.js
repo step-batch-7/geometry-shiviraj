@@ -33,6 +33,7 @@ class Circle {
     return this;
   }
   covers(point) {
+    if (!(point instanceof Point)) return false;
     return this.radius >= this.centre.findDistanceTo(point);
   }
 }

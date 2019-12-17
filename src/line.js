@@ -1,8 +1,8 @@
 const Point = require('./point');
 const { min, max, hypot } = Math;
 
-const isBetween = function(start, end, no) {
-  return min(start, end) <= no && no <= max(start, end);
+const isNotInRange = function(start, end, no) {
+  return no < min(start, end) || max(start, end) < no;
 };
 
 class Line {
@@ -20,7 +20,9 @@ class Line {
     if (!(other instanceof Line)) return false;
     const areEndsAEqual = this.endA.isEqualTo(other.endA);
     const areEndsBEqual = this.endB.isEqualTo(other.endB);
-    return areEndsAEqual && areEndsBEqual;
+    const isAEqualToB = this.endA.isEqualTo(other.endB);
+    const isBEqualToA = this.endB.isEqualTo(other.endA);
+    return (areEndsAEqual && areEndsBEqual) || (isBEqualToA && isAEqualToB);
   }
   get length() {
     const point = new Point(this.endA.x, this.endA.y);
@@ -29,7 +31,7 @@ class Line {
   get slope() {
     const dX = this.endB.x - this.endA.x;
     const dY = this.endB.y - this.endA.y;
-    return dY / dX;
+    return dY / dX != -Infinity ? dY / dX : Infinity;
   }
   get yIntercept() {
     return this.endA.y - this.slope * this.endA.x;
@@ -46,14 +48,14 @@ class Line {
     return this.slope === other.slope && distance != 0;
   }
   findX(y) {
+    if (isNotInRange(this.endA.y, this.endB.y, y)) return NaN;
     let X = (y - this.endA.y) / this.slope + this.endA.x;
-    if (!isBetween(this.endA.x, this.endB.x, X)) X = NaN;
-    return X;
+    return this.slope != 0 ? X : this.endA.x;
   }
   findY(x) {
+    if (isNotInRange(this.endA.x, this.endB.x, x)) return NaN;
     let Y = (x - this.endA.x) * this.slope + this.endA.y;
-    if (!isBetween(this.endA.y, this.endB.y, Y)) Y = NaN;
-    return Y;
+    return this.slope != Infinity ? Y : this.endA.y;
   }
   get midPoint() {
     const middleOfX = (this.endA.x + this.endB.x) / 2;
@@ -70,7 +72,7 @@ class Line {
     return this.findX(point.y) === point.x && this.findY(point.x) === point.y;
   }
   findPointFromStart(dist) {
-    if (!isBetween(0, this.length, dist)) return null;
+    if (isNotInRange(0, this.length, dist)) return null;
     const distRatio = dist / this.length;
     const X = distRatio * this.endB.x + (1 - distRatio) * this.endA.x;
     const Y = distRatio * this.endB.y + (1 - distRatio) * this.endA.y;
