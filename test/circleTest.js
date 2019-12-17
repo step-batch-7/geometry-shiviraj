@@ -73,4 +73,40 @@ describe('Circle', () => {
       assert.isFalse(actual);
     });
   });
+
+  describe('Move To', () => {
+    it('Should give new circle of new centre', () => {
+      const circle = new Circle({ x: 0, y: 0 }, 5);
+      const actual = circle.moveTo({ x: 1, y: 1 });
+      const expected = new Circle({ x: 1, y: 1 }, 5);
+      assert.deepStrictEqual(actual, expected);
+    });
+  });
+
+  describe('Covers', () => {
+    const circle = new Circle({ x: 0, y: 0 }, 5);
+
+    it('Should give true if point is inside the Circle', () => {
+      const point = new Point(0, 3);
+      const actual = circle.covers(point);
+      assert.isTrue(actual);
+    });
+
+    it('Should give true if point is on the Circle', () => {
+      const point = new Point(0, 5);
+      const actual = circle.covers(point);
+      assert.isTrue(actual);
+    });
+
+    it('Should give false if point is outside of circle', () => {
+      const point = new Point(7, 7);
+      const actual = circle.covers(point);
+      assert.isFalse(actual);
+    });
+
+    it('Should give false if point is not type of Point', () => {
+      const actual = circle.covers('point');
+      assert.isFalse(actual);
+    });
+  });
 });

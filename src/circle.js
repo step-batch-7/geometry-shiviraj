@@ -28,6 +28,13 @@ class Circle {
       (point.x - this.centre.x) ** 2 + (point.y - this.centre.y) ** 2
     );
   }
+  moveTo(point) {
+    this.centre = new Point(point.x, point.y);
+    return this;
+  }
+  covers(point) {
+    return this.radius >= this.centre.findDistanceTo(point);
+  }
 }
 
 module.exports = Circle;
