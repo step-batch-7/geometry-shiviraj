@@ -31,14 +31,15 @@ class Line {
   get slope() {
     const dX = this.endB.x - this.endA.x;
     const dY = this.endB.y - this.endA.y;
-    return dY / dX != -Infinity ? dY / dX : Infinity;
+    if (dY / dX != -Infinity) return dY / dX;
+    return Infinity;
   }
   get yIntercept() {
     return this.endA.y - this.slope * this.endA.x;
   }
   distanceFromPoint(point) {
     return Math.abs(
-      (-this.slope * point.x + point.y - this.yIntercept) / hypot(1, this.slope)
+      (this.slope * point.x - point.y + this.yIntercept) / hypot(1, this.slope)
     );
   }
   isParallelTo(other) {
@@ -69,7 +70,7 @@ class Line {
   }
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
-    return this.findX(point.y) == point.x;
+    return this.findX(point.y) == point.x || point.y == this.findY(point.x);
   }
   findPointFromStart(dist) {
     if (isNotInRange(0, this.length, dist)) return null;
