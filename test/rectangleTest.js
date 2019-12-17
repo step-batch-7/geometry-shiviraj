@@ -10,4 +10,18 @@ describe('Rectangle', () => {
       assert.deepStrictEqual(actual, expected);
     });
   });
+
+  describe('Area', () => {
+    it('Should give area of rectangle', () => {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 5, y: 4 });
+      const actual = rectangle.area;
+      assert.deepStrictEqual(actual, 20);
+    });
+
+    it('Should give area of rectangle ', () => {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 5, y: 0 });
+      const actual = rectangle.area;
+      assert.deepStrictEqual(actual, 0);
+    });
+  });
 });
