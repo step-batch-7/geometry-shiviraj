@@ -24,7 +24,18 @@ class Rectangle {
     return 2 * (this.height + this.width);
   }
   isEqualTo(other) {
-    return this.endA.isEqualTo(other.endA) && this.endC.isEqualTo(other.endC);
+    return this.toString() === other.toString();
+  }
+  get sides() {
+    const side1 = new Line(this.endA, { x: this.endC.x, y: this.endA.y });
+    const side2 = new Line({ x: this.endC.x, y: this.endA.y }, this.endC);
+    const side3 = new Line(this.endC, { x: this.endA.x, y: this.endC.y });
+    const side4 = new Line({ x: this.endA.x, y: this.endC.y }, this.endA);
+    return [side1, side2, side3, side4];
+  }
+  hasPoint(point) {
+    if (!(point instanceof Point)) return false;
+    return this.sides.some(side => point.isOn(side) == true);
   }
 }
 module.exports = Rectangle;

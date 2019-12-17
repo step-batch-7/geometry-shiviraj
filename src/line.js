@@ -69,7 +69,7 @@ class Line {
   }
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
-    return this.findX(point.y) === point.x && this.findY(point.x) === point.y;
+    return this.findX(point.y) == point.x;
   }
   findPointFromStart(dist) {
     if (isNotInRange(0, this.length, dist)) return null;

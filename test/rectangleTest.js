@@ -1,5 +1,6 @@
 const assert = require('chai').assert;
 const Rectangle = require('../src/rectangle');
+const Point = require('../src/point');
 
 describe('Rectangle', () => {
   describe('To String', () => {
@@ -55,6 +56,31 @@ describe('Rectangle', () => {
 
     it('Should check for if rectangles are not same type', () => {
       const actual = rectangle1.isEqualTo('rectangle2');
+      assert.isFalse(actual);
+    });
+  });
+
+  describe('has Point', () => {
+    const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 5, y: 5 });
+
+    it('Should give true if point is on Rectangle', () => {
+      const point = new Point(0, 2);
+      assert.isTrue(rectangle.hasPoint(point));
+    });
+
+    it('Should give false if point is inside on Rectangle', () => {
+      const point = new Point(1, 2);
+      assert.isFalse(rectangle.hasPoint(point));
+    });
+
+    it('Should give false if point is outside of rectangle', () => {
+      const point = new Point(7, 7);
+      const actual = rectangle.hasPoint(point);
+      assert.isFalse(actual);
+    });
+
+    it('Should give false if point is not type of Point', () => {
+      const actual = rectangle.hasPoint('point');
       assert.isFalse(actual);
     });
   });
