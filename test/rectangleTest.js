@@ -38,4 +38,24 @@ describe('Rectangle', () => {
       assert.deepStrictEqual(actual, 10);
     });
   });
+  describe('EqualTo', () => {
+    const rectangle1 = new Rectangle({ x: 2, y: 3 }, { x: 5, y: 9 });
+
+    it('Should check if rectangles are equal', () => {
+      const rectangle2 = new Rectangle({ x: 2, y: 3 }, { x: 5, y: 9 });
+      const actual = rectangle1.isEqualTo(rectangle2);
+      assert.isTrue(actual);
+    });
+
+    it('Should check if rectangles are not equal', () => {
+      const rectangle2 = new Rectangle({ x: 2, y: 5 }, { x: 5, y: 3 });
+      const actual = rectangle1.isEqualTo(rectangle2);
+      assert.isFalse(actual);
+    });
+
+    it('Should check for if rectangles are not same type', () => {
+      const actual = rectangle1.isEqualTo('rectangle2');
+      assert.isFalse(actual);
+    });
+  });
 });
