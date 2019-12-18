@@ -28,7 +28,7 @@ class Rectangle {
     return 2 * (this.height + this.width);
   }
   isEqualTo(other) {
-    return this.toString() === other.toString();
+    return this.endA.isEqualTo(other.endA) && this.endC.isEqualTo(other.endC);
   }
   get sides() {
     const side1 = new Line(this.endA, { x: this.endC.x, y: this.endA.y });
